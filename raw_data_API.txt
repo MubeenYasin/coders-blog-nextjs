@@ -1,0 +1,62 @@
+{
+	"data": [
+		{
+			"id": 1,
+			"attributes": {
+				"createdAt": "2022-11-21T19:13:48.274Z",
+				"updatedAt": "2022-11-21T20:17:18.394Z",
+				"publishedAt": "2022-11-21T19:13:55.140Z",
+				"Title": "Next.Js",
+				"Slug": "next-js"
+			}
+		},
+		{
+			"id": 2,
+			"attributes": {
+				"createdAt": "2022-11-21T19:16:09.304Z",
+				"updatedAt": "2022-11-21T19:16:10.895Z",
+				"publishedAt": "2022-11-21T19:16:10.893Z",
+				"Title": "TypeScript",
+				"Slug": "type-script"
+			}
+		},
+		{
+			"id": 3,
+			"attributes": {
+				"createdAt": "2022-11-21T19:16:35.966Z",
+				"updatedAt": "2022-11-21T19:16:37.233Z",
+				"publishedAt": "2022-11-21T19:16:37.231Z",
+				"Title": "JavaScript",
+				"Slug": "java-script"
+			}
+		},
+		{
+			"id": 4,
+			"attributes": {
+				"createdAt": "2022-11-21T19:17:00.192Z",
+				"updatedAt": "2022-11-21T19:18:57.643Z",
+				"publishedAt": "2022-11-21T19:18:57.639Z",
+				"Title": "html and css",
+				"Slug": "html-and-css"
+			}
+		},
+		{
+			"id": 5,
+			"attributes": {
+				"createdAt": "2022-11-21T19:17:26.947Z",
+				"updatedAt": "2022-11-21T19:17:29.323Z",
+				"publishedAt": "2022-11-21T19:17:29.321Z",
+				"Title": "Node.js",
+				"Slug": "node-js"
+			}
+		}
+	],
+	"meta": {
+		"pagination": {
+			"page": 1,
+			"pageSize": 25,
+			"pageCount": 1,
+			"total": 5
+		}
+	}
+}

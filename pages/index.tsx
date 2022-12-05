@@ -1,8 +1,13 @@
+import { GetServerSideProps, NextPage } from 'next'
+import { fetchCategories } from '../http'
+import { ICategory, ICollectionResponse } from '../types'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import {AxiosResponse} from 'axios'
 
-export default function Home() {
+
+const Home: NextPage = () => {
   return (
     <div>
       <Head>
@@ -18,3 +23,22 @@ export default function Home() {
     </div>
   )
 }
+
+export const getServerSideProps:GetServerSideProps = async () => {
+  const {data}: AxiosResponse<ICollectionResponse<ICategory[]>> = await fetchCategories()
+  console.log(data)
+  return{
+    props:{
+      categories:{
+        items: data
+      }
+    }
+  }
+} 
+
+export default Home
+
+
+
+
+
