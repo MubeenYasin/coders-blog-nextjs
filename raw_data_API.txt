@@ -60,3 +60,101 @@
 		}
 	}
 }
+
+
+
+//Artcal data
+
+{
+	"data": [
+		{
+			"id": 1,
+			"attributes": {
+				"Title": "How to learn html",
+				"Body": "html is a Hyper Text Markup Language. It's use to develop web pages. It is very easy to learn. ",
+				"Slug": "how-to-learn-html",
+				"createdAt": "2022-11-21T19:37:23.030Z",
+				"updatedAt": "2022-11-21T20:30:33.687Z",
+				"publishedAt": "2022-11-21T19:37:24.752Z",
+				"Image": {
+					"data": {
+						"id": 1,
+						"attributes": {
+							"name": "html.png",
+							"alternativeText": null,
+							"caption": null,
+							"width": 1600,
+							"height": 800,
+							"formats": {
+								"thumbnail": {
+									"name": "thumbnail_html.png",
+									"hash": "thumbnail_html_7b2e3b6c7e",
+									"ext": ".png",
+									"mime": "image/png",
+									"path": null,
+									"width": 245,
+									"height": 122,
+									"size": 18.43,
+									"url": "/uploads/thumbnail_html_7b2e3b6c7e.png"
+								},
+								"large": {
+									"name": "large_html.png",
+									"hash": "large_html_7b2e3b6c7e",
+									"ext": ".png",
+									"mime": "image/png",
+									"path": null,
+									"width": 1000,
+									"height": 500,
+									"size": 108.51,
+									"url": "/uploads/large_html_7b2e3b6c7e.png"
+								},
+								"small": {
+									"name": "small_html.png",
+									"hash": "small_html_7b2e3b6c7e",
+									"ext": ".png",
+									"mime": "image/png",
+									"path": null,
+									"width": 500,
+									"height": 250,
+									"size": 44.22,
+									"url": "/uploads/small_html_7b2e3b6c7e.png"
+								},
+								"medium": {
+									"name": "medium_html.png",
+									"hash": "medium_html_7b2e3b6c7e",
+									"ext": ".png",
+									"mime": "image/png",
+									"path": null,
+									"width": 750,
+									"height": 375,
+									"size": 73.52,
+									"url": "/uploads/medium_html_7b2e3b6c7e.png"
+								}
+							},
+							"hash": "html_7b2e3b6c7e",
+							"ext": ".png",
+							"mime": "image/png",
+							"size": 101.38,
+							"url": "/uploads/html_7b2e3b6c7e.png",
+							"previewUrl": null,
+							"provider": "local",
+							"provider_metadata": null,
+							"createdAt": "2022-11-21T19:35:00.708Z",
+							"updatedAt": "2022-11-21T19:35:00.708Z"
+						}
+					}
+				},
+				"category": {
+					"data": {
+						"id": 4,
+						"attributes": {
+							"createdAt": "2022-11-21T19:17:00.192Z",
+							"updatedAt": "2022-11-21T19:18:57.643Z",
+							"publishedAt": "2022-11-21T19:18:57.639Z",
+							"Title": "html and css",
+							"Slug": "html-and-css"
+						}
+					}
+				}
+			}
+		},

@@ -1,32 +1,36 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { fetchCategories } from '../http'
-import { ICategory, ICollectionResponse } from '../types'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { fetchArticles, fetchCategories } from '../http'
+import { IArticle, ICategory, ICollectionResponse, IPropType } from '../types'
 import { AxiosResponse } from 'axios'
+import Head from 'next/head'
+import Tabs from '../components/Tabs'
+import ArticlesList from '../components/ArticlesList'
 
-//To Get Props from Server Side and return Props as object "categories:{item:categories.data}" 
 export const getServerSideProps: GetServerSideProps = async () => {
+  //To Get Props from Server Side and return Props as object "categories:{item:categories.data}" 
   const { data: categories }: AxiosResponse<ICollectionResponse<ICategory[]>> = await fetchCategories()
   // console.log('Category => ', categories) // Whole fecth all data in category
   // console.log('Title =>', categories.data[0].attributes.Title) // fetch only Title
+
+  //To Get Props from Server Side and return Props as object "aricles:{item:articles.data}" 
+  const { data: articles }: AxiosResponse<ICollectionResponse<IArticle>> = await fetchArticles()
+
+
   return {
     props: {
       categories: {
         items: categories.data
+      },
+      articles:{
+        items: articles.data,
+        pagination: articles.meta.pagination
       }
     }
   }
 }
 
-// Type of Categories Objest, and ICategory already defined in /type/intex.tsx
-interface IPropType {
-  categories: {
-    items: ICategory[]
-  }
-}
-const Home: NextPage<IPropType> = ({ categories }) => {
+
+const Home: NextPage<IPropType> = ({ categories, articles }) => {
   // console.log('Category => ', categories) // Whole fecth all data in category
   return (
     <div>
@@ -36,16 +40,12 @@ const Home: NextPage<IPropType> = ({ categories }) => {
         <link rel="icon" href="/m.png" />
       </Head>
 
-        {categories.items.map(catagory => {
-          return <span>
-            {catagory.attributes.Title}<br/>
-          </span>
-        })}
+      {/* Category  */}
+      <Tabs categories={categories.items} />
 
-      <main>
-        <h1 className='text-red-700'>Welcom to Coder blog Next.Js</h1>
+      {/* Articales */}
+      <ArticlesList articles={articles.items} />
 
-      </main>
 
     </div>
   )

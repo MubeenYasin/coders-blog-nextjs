@@ -8,7 +8,7 @@ const Navbar = () => {
             <Link href='/'>
                 <div className='flex items-center cursor-pointer gap-2 '>
                     <Image src='/m.png' alt='logo' width='40' height='40' />
-                    <span className='font-bold text-emerald-600'>Mubi's Blog</span>
+                    <span className='font-bold text-darkcyan'>Mubi's Blog</span>
                 </div>
             </Link>
             <ul className='flex items-center gap-8 text-gray-600 font-medium uppercase'>
@@ -35,7 +35,7 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href={'/'} className='bg-emerald-600 py-2 px-4 rounded-sm text-white hover:bg-emerald-800 transition-all'>
+                    <Link href={'/'} className='bg-darkcyan py-2 px-4 rounded-5 text-white hover:bg-emerald-800 transition-all'>
                         Sign up
                     </Link>
                 </li>

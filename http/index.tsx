@@ -16,3 +16,8 @@ export const fetchCategories = async () => {
 }
 
 //To fetch Articales
+export const fetchArticles = async () => {
+    return (
+        api.get('/api/articles')
+    )
+}
