@@ -4,10 +4,30 @@ import { ICategory, ICollectionResponse } from '../types'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {AxiosResponse} from 'axios'
+import { AxiosResponse } from 'axios'
 
+//To Get Props from Server Side and return Props as object "categories:{item:categories.data}" 
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data: categories }: AxiosResponse<ICollectionResponse<ICategory[]>> = await fetchCategories()
+  // console.log('Category => ', categories) // Whole fecth all data in category
+  // console.log('Title =>', categories.data[0].attributes.Title) // fetch only Title
+  return {
+    props: {
+      categories: {
+        items: categories.data
+      }
+    }
+  }
+}
 
-const Home: NextPage = () => {
+// Type of Categories Objest, and ICategory already defined in /type/intex.tsx
+interface IPropType {
+  categories: {
+    items: ICategory[]
+  }
+}
+const Home: NextPage<IPropType> = ({ categories }) => {
+  // console.log('Category => ', categories) // Whole fecth all data in category
   return (
     <div>
       <Head>
@@ -16,25 +36,20 @@ const Home: NextPage = () => {
         <link rel="icon" href="/m.png" />
       </Head>
 
+        {categories.items.map(catagory => {
+          return <span>
+            {catagory.attributes.Title}<br/>
+          </span>
+        })}
+
       <main>
         <h1 className='text-red-700'>Welcom to Coder blog Next.Js</h1>
+
       </main>
 
     </div>
   )
 }
-
-export const getServerSideProps:GetServerSideProps = async () => {
-  const {data}: AxiosResponse<ICollectionResponse<ICategory[]>> = await fetchCategories()
-  console.log(data)
-  return{
-    props:{
-      categories:{
-        items: data
-      }
-    }
-  }
-} 
 
 export default Home
 

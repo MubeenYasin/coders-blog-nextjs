@@ -6,7 +6,7 @@ export interface ICollectionResponse<T> {
 }
 
 export interface ICategory {
-    data: number,
+    id: number,
     attributes: ICategoryAtirbute,
 }
 
