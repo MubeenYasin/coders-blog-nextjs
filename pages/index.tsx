@@ -1,37 +1,54 @@
+import qs from 'qs'
 import { GetServerSideProps, NextPage } from 'next'
-import { fetchArticles, fetchCategories } from '../http'
-import { IArticle, ICategory, ICollectionResponse, IPropType } from '../types'
+import { fetchArticles, fetchCategories, fetchUsers } from '../http/Http'
+import { IArticle, ICategory, ICollectionResponse, IPropType, IUser } from '../types/Types'
 import { AxiosResponse } from 'axios'
 import Head from 'next/head'
 import Tabs from '../components/Tabs'
 import ArticlesList from '../components/ArticlesList'
 
 export const getServerSideProps: GetServerSideProps = async () => {
+
+  const options = {
+    populate: ['auther.avatar'],
+    sort: ['id:desc']
+  }
+  const queryString = qs.stringify(options)
+  console.log('String => ',  queryString)
+
   //To Get Props from Server Side and return Props as object "categories:{item:categories.data}" 
   const { data: categories }: AxiosResponse<ICollectionResponse<ICategory[]>> = await fetchCategories()
   // console.log('Category => ', categories) // Whole fecth all data in category
   // console.log('Title =>', categories.data[0].attributes.Title) // fetch only Title
 
   //To Get Props from Server Side and return Props as object "aricles:{item:articles.data}" 
-  const { data: articles }: AxiosResponse<ICollectionResponse<IArticle>> = await fetchArticles()
+  const { data: articles }: AxiosResponse<ICollectionResponse<IArticle[]>> = await fetchArticles(queryString)
+  // console.log(articles)
 
+  const { data: users }: AxiosResponse<IUser[]> = await fetchUsers()
+  // console.log('User =>', data.username)
 
   return {
     props: {
       categories: {
         items: categories.data
       },
-      articles:{
+      articles: {
         items: articles.data,
         pagination: articles.meta.pagination
+      },
+      users: {
+        items: users
       }
     }
   }
 }
 
 
-const Home: NextPage<IPropType> = ({ categories, articles }) => {
+const Home: NextPage<IPropType> = ({ categories, articles, users }) => {
   // console.log('Category => ', categories) // Whole fecth all data in category
+  console.log('User =>', users.items)
+
   return (
     <div>
       <Head>
@@ -44,8 +61,14 @@ const Home: NextPage<IPropType> = ({ categories, articles }) => {
       <Tabs categories={categories.items} />
 
       {/* Articales */}
-      <ArticlesList articles={articles.items} />
+      <ArticlesList articles={articles.items}  users={users.items}/>
 
+    {/* {
+      users.items.map(elem => {
+        // eslint-disable-next-line react/jsx-key
+        return <span>{elem.id}</span>
+      })
+    } */}
 
     </div>
   )

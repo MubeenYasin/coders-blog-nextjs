@@ -16,8 +16,16 @@ export const fetchCategories = async () => {
 }
 
 //To fetch Articales
-export const fetchArticles = async () => {
+export const fetchArticles = async (queryString: string) => {
     return (
-        api.get('/api/articles')
+        api.get(`/api/articles?${queryString}`)
+    )
+}
+
+
+export const fetchUsers = async () => {
+    return (
+        // api.get(`/api/users?${queryString}`)
+        api.get('/api/users')
     )
 }
