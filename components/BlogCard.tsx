@@ -17,7 +17,7 @@ const BlogCard = ({ article }: IPropType) => {
         </h1>
       </Link>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 mt-2">
         <div className="rounded-5 overflow-hidden">
           <Image src={`http://localhost:1337${article.attributes.auther.data.attributes.avatar.data.attributes.formats.thumbnail.url}`}
             width={60}
@@ -30,6 +30,10 @@ const BlogCard = ({ article }: IPropType) => {
         <div className="text-gray-400">
           {formatDate(article.attributes.createdAt)}
         </div>
+      </div>
+
+      <div className="text-gray-500 mt-2">
+      {article.attributes.shortDescription.slice(0,200)}{article.attributes.shortDescription.length > 200 ? '...' : ''  }
       </div>
 
     </div>

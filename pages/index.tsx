@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { GetServerSideProps, NextPage } from 'next'
 import { fetchArticles, fetchCategories, fetchUsers } from '../http/Http'
-import { IArticle, ICategory, ICollectionResponse, IPropType, IUser } from '../types/Types'
+import { IArticle, ICategory, ICollectionResponse, IPropType} from '../types/Types'
 import { AxiosResponse } from 'axios'
 import Head from 'next/head'
 import Tabs from '../components/Tabs'
@@ -25,8 +25,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data: articles }: AxiosResponse<ICollectionResponse<IArticle[]>> = await fetchArticles(queryString)
   // console.log(articles)
 
-  const { data: users }: AxiosResponse<IUser[]> = await fetchUsers()
-  // console.log('User =>', data.username)
 
   return {
     props: {
@@ -37,17 +35,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
         items: articles.data,
         pagination: articles.meta.pagination
       },
-      users: {
-        items: users
-      }
     }
   }
 }
 
 
-const Home: NextPage<IPropType> = ({ categories, articles, users }) => {
+const Home: NextPage<IPropType> = ({ categories, articles }) => {
   // console.log('Category => ', categories) // Whole fecth all data in category
-  console.log('User =>', users.items)
+  // console.log('User =>', users.items)
 
   return (
     <div>
@@ -61,7 +56,7 @@ const Home: NextPage<IPropType> = ({ categories, articles, users }) => {
       <Tabs categories={categories.items} />
 
       {/* Articales */}
-      <ArticlesList articles={articles.items}  users={users.items}/>
+      <ArticlesList articles={articles.items}/>
 
     {/* {
       users.items.map(elem => {

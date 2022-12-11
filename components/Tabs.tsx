@@ -17,7 +17,7 @@ const Tabs = ({ categories }: IPropType) => {
         )
     }
 
-    const handleOnSearch = (query:string) => {
+    const handleOnSearch = (query: string) => {
         console.log('Search')
     }
 
@@ -26,7 +26,7 @@ const Tabs = ({ categories }: IPropType) => {
             <ul className="flex items-center gap-8  font-bold ">
                 <li className={'pb-2 ' + `${router.pathname === '/'
                     ? 'border-b-3 border-darkcyan text-darkcyan'
-                    : 'text-gray-500'
+                    : 'border-b-3 border-white text-gray-500'
                     }`}>
                     <Link href={'/'}>Recent</Link>
                 </li>
@@ -35,11 +35,10 @@ const Tabs = ({ categories }: IPropType) => {
                     categories.map((category) => {
                         return (
                             <li key={category.id}
-                                className={'pb-2' + `${isActiveLink(category)
+                                className={'pb-2 ' + `${isActiveLink(category)
                                     ? 'border-b-3 border-darkcyan text-darkcyan'
-                                    : 'text-gray-500'
-                                    }`
-                                }>
+                                    : 'border-b-3 border-white text-gray-500'
+                                    }`}>
                                 <Link href={`/category/${category.attributes.Slug}`}>{category.attributes.Title}</Link>
                             </li>
 
@@ -51,9 +50,9 @@ const Tabs = ({ categories }: IPropType) => {
             <ul>
                 <li>
                     <input onChange={(e) => handleOnSearch(e.target.value)}
-                    type="text" 
-                    placeholder="Search" 
-                    className="outline-non border rounded-5  px-2 py-1 ml-1" />
+                        type="text"
+                        placeholder="Search"
+                        className="outline-non border rounded-5  px-2 py-1 ml-1" />
                 </li>
             </ul>
         </div>

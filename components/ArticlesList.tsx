@@ -1,25 +1,21 @@
 import { IArticle, IUser } from "../types/Types"
 import BlogCard from "./BlogCard"
+import BlogCardImg from "./BlogCardImg"
 
 interface IPropType {
     articles: IArticle[],
-    users: IUser[]
 }
 
-const ArticlesList = ({ articles, users}: IPropType) => {
+const ArticlesList = ({ articles }: IPropType) => {
     return (
         <div className="grid lg:grid-cols-2 grid-gap gap-16 mt-16">
-            {articles.map(article => {
+            {articles.map((article, idx) => {
                 // eslint-disable-next-line react/jsx-key
-                return <span><BlogCard article={article} key={article.id}/></span>
+                return (
+                    <div key={article.id}>
+                    { idx === 1 ? <BlogCardImg article={article} /> : <BlogCard article={article} />}
+                    </div>)
             })}
-
-            
-            {/* {users.map(user => {
-                // eslint-disable-next-line react/jsx-key
-                return <span>{user.username}</span>
-            })} */}
-
         </div>
     )
 }

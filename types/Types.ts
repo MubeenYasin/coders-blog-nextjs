@@ -13,33 +13,36 @@ export interface IResourceMeta {
         total: number
     }
 }
-
 // Type of IPropType 
 export interface IPropType {
     categories: {
-        items: ICategory[]
+        items: ICategory[],
+        pagination: IPagination[]
     },
     articles: {
-        items: IArticle[]
-    }
-    users:{
-        items: IUser[]
-    }
+        items: IArticle[],
+        pagination: IPagination[]
+    },
+    pagination: {
+        items: IPagination[]
+    },
 }
-
 //  Types for Categoy
 export interface ICategory {
     id: number,
     attributes: {
-        Title:string,
+        Title: string,
         Slug: string
+    },
+    meta: {
+        pagination: {
+            page: number,
+            pageSize: number,
+            pageCount: number,
+            total: number
+        }
     }
 }
-// export interface ICategoryAtirbute {
-//     Title: string,
-//     Slug: string,
-// }
-
 // Types for Articles
 export interface IArticle {
     id: number,
@@ -48,6 +51,7 @@ export interface IArticle {
         Body: string,
         Slug: string,
         createdAt: string,
+        shortDescription: string,
         Image: {
             data: {
                 aatributes: {
@@ -77,68 +81,34 @@ export interface IArticle {
                 }
             }
         }
+    },
+    meta: {
+        pagination: {
+            page: number,
+            pageSize: number,
+            pageCount: number,
+            total: number
+        }
     }
 }
-// export interface IArticleAttribute {
-//     Title: string,
-//     Body: string,
-//     Slug: string,
-//     createdAt: string,
-//     // Image: IImageData,
-//     Image: {
-//         data: {
-//             attributes: {
-//                 formats: {
-//                     small: {
-//                         url: string
-//                     }
-//                 }
-//             }
-//         }
-//     },
-//     auther: IAuthor,
-
-// }
-// export interface IImageData {
-//     data: {
-//         attributes: {
-//             formats: {
-//                 small: {
-//                     url: string
-//                 }
-//             }
-//         }
-//     }
-// }
-// export interface IAuthor {
-//     data: {
-//         attributes: {
-//             username: string,
-//             avatar: {
-//                 data: {
-//                     atributes: {
-//                         formats: {
-//                             thumbnail: {
-//                                 url: string
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-export interface IUser{
+// Type Pagination
+export interface IPagination {
+    page: number,
+    pageSize: number,
+    pageCount: number,
+    total: number
+}
+// Type of User
+export interface IUser {
     id: number,
     username: string,
-    avatar:{
-        formats:{
-            thumbnail:{
+    avatar: {
+        formats: {
+            thumbnail: {
                 url: string
             },
-            small:{
-                url:string
+            small: {
+                url: string
             }
         }
     }
