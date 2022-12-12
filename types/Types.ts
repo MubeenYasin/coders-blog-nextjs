@@ -27,11 +27,12 @@ export interface IPropType {
     pagination: {
         items: IPagination
     },
-    
     slug: string,
     page: number,
     pageCount: number,
-    redirectUrl: string
+    redirectUrl: string,
+
+
 }
 //  Types for Categoy
 export interface ICategory {
@@ -107,3 +108,14 @@ export interface IPagination {
 
 //Type for Pagination Direction
 export type TDirection = 1 | -1
+
+//Type for Quries
+export interface IQueryOtions {
+    filters?: any,
+    sort: any,
+    populate: any,
+    pagination: {
+        page: number,
+        pageSize: number
+    }
+}

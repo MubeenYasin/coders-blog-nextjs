@@ -1,26 +1,36 @@
 import qs from 'qs'
 import { GetServerSideProps, NextPage } from 'next'
 import { fetchArticles, fetchCategories, fetchUsers } from '../http/Http'
-import { IArticle, ICategory, ICollectionResponse, IPropType } from '../types/Types'
+import { IArticle, ICategory, ICollectionResponse, IPropType, IQueryOtions, } from '../types/Types'
 import { AxiosResponse } from 'axios'
 import Head from 'next/head'
 import Tabs from '../components/Tabs'
 import ArticlesList from '../components/ArticlesList'
 import Pagination from '../components/Pagination'
+import { useRouter } from 'next/router'
+import { debounce } from '../utils/Utils'
 
 //************************************************************ */
 
-export const getServerSideProps: GetServerSideProps = async ({query}) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
-  const options = {
+  const options: IQueryOtions = {
     populate: ['auther.avatar'],
     sort: ['id:desc'],
     pagination: {
-      page : query.page ? query.page : 1,
-      pageSize : 4
+      page: query.page ? +query.page : 1,
+      pageSize: 1
     }
-
   }
+
+  if (query.search) {
+    options.filters = {
+      Title: {
+        $containsi: query.search
+      }
+    }
+  }
+
   const queryString = qs.stringify(options)
   // console.log('String => ', queryString)
 
@@ -48,11 +58,20 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
 }
 
 //************************************************************ */
-const Home: NextPage<IPropType> = ({ categories, articles}) => {
+
+
+const Home: NextPage<IPropType> = ({ categories, articles }) => {
   // console.log('Category => ', categories) // Whole fecth all data in category
   // console.log('User =>', users.items)
 
-  const {page, pageCount} = articles.pagination
+  const router = useRouter()
+
+  const handleSearch = (query: string) => {
+    router.push(`/?search=${query}`);
+    // console.log(`${query}`);
+  };
+
+  const { page, pageCount } = articles.pagination
 
   return (
     <div>
@@ -63,7 +82,7 @@ const Home: NextPage<IPropType> = ({ categories, articles}) => {
       </Head>
 
       {/* Category  */}
-      <Tabs categories={categories.items} />
+      <Tabs categories={categories.items} handleOnSearch={debounce(handleSearch, 500)} />
 
       {/* Articales */}
       <ArticlesList articles={articles.items} />

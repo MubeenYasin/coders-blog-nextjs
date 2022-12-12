@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import qs from "qs"
 import { IPropType, TDirection } from "../types/Types"
 
-const Pagination = ({page, pageCount, redirectUrl = '/'}:IPropType) => {
+const Pagination = ({ page, pageCount, redirectUrl = '/' }: IPropType) => {
     const router = useRouter()
 
     const isNextDisabled = (): boolean => {
@@ -20,7 +20,7 @@ const Pagination = ({page, pageCount, redirectUrl = '/'}:IPropType) => {
             return
         }
 
-        const queryString = qs.stringify({...router.query, page: page + direction})
+        const queryString = qs.stringify({ ...router.query, page: page + direction })
         router.push(`${redirectUrl}?${queryString}`)
     }
 
@@ -40,3 +40,4 @@ const Pagination = ({page, pageCount, redirectUrl = '/'}:IPropType) => {
 
 
 export default Pagination
+

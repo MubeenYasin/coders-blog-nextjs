@@ -3,11 +3,12 @@ import { useRouter } from "next/router"
 import { ICategory } from "../types/Types"
 
 interface IPropType {
-    categories: ICategory[]
+    categories: ICategory[],
+    handleOnSearch: (query: string) => void
 }
 
 
-const Tabs = ({ categories }: IPropType) => {
+const Tabs = ({ categories, handleOnSearch }: IPropType) => {
 
     const router = useRouter()
 
@@ -16,11 +17,6 @@ const Tabs = ({ categories }: IPropType) => {
             category.attributes.Slug === router.query.category
         )
     }
-
-    const handleOnSearch = (query: string) => {
-        console.log('Search')
-    }
-
     return (
         <div className="flex justify-between  border-b border-gray-100  my-8">
             <ul className="flex items-center gap-8  font-bold ">
@@ -37,7 +33,7 @@ const Tabs = ({ categories }: IPropType) => {
                             <li key={category.id}
                                 className={'pb-2 ' + `${isActiveLink(category)
                                     ? 'border-b-3 border-darkcyan text-darkcyan'
-                                    : 'border-b-3 border-white text-gray-500'
+                                    : 'border-b-3 border-whitetext-gray-500'
                                     }`}>
                                 <Link href={`/category/${category.attributes.Slug}`}>{category.attributes.Title}</Link>
                             </li>
@@ -49,7 +45,8 @@ const Tabs = ({ categories }: IPropType) => {
 
             <ul>
                 <li>
-                    <input onChange={(e) => handleOnSearch(e.target.value)}
+                    <input
+                        onChange={(e) => handleOnSearch(e.target.value)}
                         type="text"
                         placeholder="Search"
                         className="outline-non border rounded-5  px-2 py-1 ml-1" />
