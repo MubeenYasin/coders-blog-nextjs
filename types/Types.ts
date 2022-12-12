@@ -1,3 +1,4 @@
+import { type } from "os"
 
 // we can use interface or type for data
 export interface ICollectionResponse<T> {
@@ -17,15 +18,20 @@ export interface IResourceMeta {
 export interface IPropType {
     categories: {
         items: ICategory[],
-        pagination: IPagination[]
+        pagination: IPagination
     },
     articles: {
         items: IArticle[],
-        pagination: IPagination[]
+        pagination: IPagination
     },
     pagination: {
-        items: IPagination[]
+        items: IPagination
     },
+    
+    slug: string,
+    page: number,
+    pageCount: number,
+    redirectUrl: string
 }
 //  Types for Categoy
 export interface ICategory {
@@ -98,18 +104,6 @@ export interface IPagination {
     pageCount: number,
     total: number
 }
-// Type of User
-export interface IUser {
-    id: number,
-    username: string,
-    avatar: {
-        formats: {
-            thumbnail: {
-                url: string
-            },
-            small: {
-                url: string
-            }
-        }
-    }
-}
+
+//Type for Pagination Direction
+export type TDirection = 1 | -1

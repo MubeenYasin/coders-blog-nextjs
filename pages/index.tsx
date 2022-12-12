@@ -1,20 +1,28 @@
 import qs from 'qs'
 import { GetServerSideProps, NextPage } from 'next'
 import { fetchArticles, fetchCategories, fetchUsers } from '../http/Http'
-import { IArticle, ICategory, ICollectionResponse, IPropType} from '../types/Types'
+import { IArticle, ICategory, ICollectionResponse, IPropType } from '../types/Types'
 import { AxiosResponse } from 'axios'
 import Head from 'next/head'
 import Tabs from '../components/Tabs'
 import ArticlesList from '../components/ArticlesList'
+import Pagination from '../components/Pagination'
 
-export const getServerSideProps: GetServerSideProps = async () => {
+//************************************************************ */
+
+export const getServerSideProps: GetServerSideProps = async ({query}) => {
 
   const options = {
     populate: ['auther.avatar'],
-    sort: ['id:desc']
+    sort: ['id:desc'],
+    pagination: {
+      page : query.page ? query.page : 1,
+      pageSize : 4
+    }
+
   }
   const queryString = qs.stringify(options)
-  console.log('String => ',  queryString)
+  // console.log('String => ', queryString)
 
   //To Get Props from Server Side and return Props as object "categories:{item:categories.data}" 
   const { data: categories }: AxiosResponse<ICollectionResponse<ICategory[]>> = await fetchCategories()
@@ -39,10 +47,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-
-const Home: NextPage<IPropType> = ({ categories, articles }) => {
+//************************************************************ */
+const Home: NextPage<IPropType> = ({ categories, articles}) => {
   // console.log('Category => ', categories) // Whole fecth all data in category
   // console.log('User =>', users.items)
+
+  const {page, pageCount} = articles.pagination
 
   return (
     <div>
@@ -56,14 +66,11 @@ const Home: NextPage<IPropType> = ({ categories, articles }) => {
       <Tabs categories={categories.items} />
 
       {/* Articales */}
-      <ArticlesList articles={articles.items}/>
+      <ArticlesList articles={articles.items} />
 
-    {/* {
-      users.items.map(elem => {
-        // eslint-disable-next-line react/jsx-key
-        return <span>{elem.id}</span>
-      })
-    } */}
+      {/* Pagination */}
+      <Pagination page={page} pageCount={pageCount} />
+
 
     </div>
   )

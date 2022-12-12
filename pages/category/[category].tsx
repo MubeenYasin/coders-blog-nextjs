@@ -6,8 +6,9 @@ import ArticlesList from "../../components/ArticlesList"
 import Tabs from "../../components/Tabs"
 import { fetchArticles, fetchCategories } from "../../http/Http"
 import { IArticle, ICategory, ICollectionResponse, IPropType } from "../../types/Types"
+import { splitHyphen } from "../../utils/Utils"
 
-// **********************
+// ********************** Functions ********************** //
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   console.log('query => ', query.category)
 
@@ -35,18 +36,17 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       articles: {
         items: articles.data,
         pagination: articles.meta.pagination
-      }
+      },
+      slug: query.category
     }
   }
 }
-//***********************
+// ********************** Functions ended ********************** //
 
 // Category Dynamic Rout Page
-const Category = ({ categories, articles }: IPropType) => {
+const Category = ({ categories, articles, slug }: IPropType) => {
   const formatedCategory = () => {
-    return (
-      'just test'
-    )
+    return  splitHyphen(slug)
   }
   return (
     <div>
@@ -56,7 +56,7 @@ const Category = ({ categories, articles }: IPropType) => {
       </Head>
 
       <Tabs categories={categories.items} />
-      <ArticlesList articles={articles.items}/>
+      <ArticlesList articles={articles.items} />
     </div>
   )
 }

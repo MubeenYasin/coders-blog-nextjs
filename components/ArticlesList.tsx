@@ -1,4 +1,4 @@
-import { IArticle, IUser } from "../types/Types"
+import { IArticle } from "../types/Types"
 import BlogCard from "./BlogCard"
 import BlogCardImg from "./BlogCardImg"
 
