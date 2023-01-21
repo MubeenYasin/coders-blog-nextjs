@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { IArticle, IUser } from "../types/Types"
+import { IArticle} from "../types/Types"
 import { formatDate } from "../utils/Utils"
 
 interface IPropType {
@@ -11,16 +11,16 @@ interface IPropType {
 const BlogCard = ({ article }: IPropType) => {
   return (
     <div>
-      <Link href={'#'}>
+      <Link href={`/article/${article.attributes.Slug}`}>
         <h1 className="text-xl text-gray-600 font-bold hover:decoration-2 hover:underline hover:cursor-pointer hover:decoration-darkcyan ">
-          {article.attributes.Slug}
+          {article.attributes.Title}
         </h1>
       </Link>
 
       <div className="flex items-center gap-3 mt-2">
         <div className="rounded-5 overflow-hidden">
           <Image src={`http://localhost:1337${article.attributes.auther.data.attributes.avatar.data.attributes.formats.thumbnail.url}`}
-            width={60}
+            width={40}
             height={40}
             alt='avatar' />
         </div>

@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className='mb-5'>
         <Component {...pageProps} />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   </>
 }

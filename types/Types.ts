@@ -27,12 +27,7 @@ export interface IPropType {
     pagination: {
         items: IPagination
     },
-    slug: string,
-    page: number,
-    pageCount: number,
-    redirectUrl: string,
-
-
+    slug: string
 }
 //  Types for Categoy
 export interface ICategory {
@@ -61,10 +56,16 @@ export interface IArticle {
         shortDescription: string,
         Image: {
             data: {
-                aatributes: {
-                    formates: {
+                attributes: {
+                    formats: {
                         small: {
                             url: string
+                        },
+                        large: {
+                            url: string
+                        },
+                        thumbnail:{
+                            url:string
                         }
                     }
                 }

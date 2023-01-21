@@ -1,6 +1,12 @@
 import { useRouter } from "next/router"
 import qs from "qs"
-import { IPropType, TDirection } from "../types/Types"
+import {TDirection } from "../types/Types"
+
+interface IPropType{
+    page: number,
+    pageCount: number,
+    redirectUrl?: string
+}
 
 const Pagination = ({ page, pageCount, redirectUrl = '/' }: IPropType) => {
     const router = useRouter()

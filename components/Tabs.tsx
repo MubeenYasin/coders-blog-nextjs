@@ -33,7 +33,7 @@ const Tabs = ({ categories, handleOnSearch }: IPropType) => {
                             <li key={category.id}
                                 className={'pb-2 ' + `${isActiveLink(category)
                                     ? 'border-b-3 border-darkcyan text-darkcyan'
-                                    : 'border-b-3 border-whitetext-gray-500'
+                                    : 'border-b-3 border-white text-gray-500'
                                     }`}>
                                 <Link href={`/category/${category.attributes.Slug}`}>{category.attributes.Title}</Link>
                             </li>

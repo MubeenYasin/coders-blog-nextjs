@@ -22,7 +22,15 @@ export const fetchArticles = async (queryString: string) => {
     )
 }
 
+// To fetch single article of the articles
+// export const fetchArticleBySlug = async (queryString: string) =>
+//     api.get(`/api/atricles?${queryString}`)
 
+
+export const fetchArticleBySlug = async (queryString: string) =>
+    api.get(`/api/articles?${queryString}`);
+
+//To fetch user
 export const fetchUsers = async () => {
     return (
         // api.get(`/api/users?${queryString}`)
